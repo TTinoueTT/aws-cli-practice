@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # Set timezone
-sudo timedatectl set-timezone Asia/Tokyo
-timedatectl
+# sudo timedatectl set-timezone Asia/Tokyo
+# timedatectl
 
 # Variables
 PREFIX="cloud01"

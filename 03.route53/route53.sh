@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Variables
-MY_DOMAIN="cloud01.work"
+MY_DOMAIN="kinmapping.com"
 
 # Route53 hosted zone
 HOSTED_ZONE_ID=$(aws route53 create-hosted-zone \
@@ -17,17 +17,17 @@ aws route53 list-resource-record-sets \
 
 # ACM
 CERTIFICATE_ARN=$(aws acm request-certificate \
-  --domain-name *.${MY_DOMAIN} \
+  --domain-name "*.${MY_DOMAIN}" \
   --validation-method DNS \
-  --query "CertificateArn" --output text) && echo $CERTIFICATE_ARN
+  --query "CertificateArn" --output text) && echo "$CERTIFICATE_ARN"
 
 VALIDATION_RECORD_NAME=$(aws acm describe-certificate \
-  --certificate-arn $CERTIFICATE_ARN \
-  --query "Certificate.DomainValidationOptions[*].ResourceRecord.Name" --output text) && echo $VALIDATION_RECORD_NAME
+  --certificate-arn "$CERTIFICATE_ARN" \
+  --query "Certificate.DomainValidationOptions[*].ResourceRecord.Name" --output text) && echo "$VALIDATION_RECORD_NAME"
 
 VALIDATION_RECORD_VALUE=$(aws acm describe-certificate \
-  --certificate-arn $CERTIFICATE_ARN \
-  --query "Certificate.DomainValidationOptions[*].ResourceRecord.Value" --output text) && echo $VALIDATION_RECORD_VALUE
+  --certificate-arn "$CERTIFICATE_ARN" \
+  --query "Certificate.DomainValidationOptions[*].ResourceRecord.Value" --output text) && echo "$VALIDATION_RECORD_VALUE"
 
 ## DNS validation
 # Update record sets file

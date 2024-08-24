@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Variables
 PREFIX="cloud01"
-MY_DOMAIN="cloud01.work"
+MY_DOMAIN="kinmapping.com"
 PUBLIC_SUBNET_1a_ID=$(aws ec2 describe-subnets --filters Name=tag:Name,Values=${PREFIX}-public-subnet-1a --query "Subnets[*].SubnetId" --output text) && echo $PUBLIC_SUBNET_1a_ID
 PUBLIC_SUBNET_1c_ID=$(aws ec2 describe-subnets --filters Name=tag:Name,Values=${PREFIX}-public-subnet-1c --query "Subnets[*].SubnetId" --output text) && echo $PUBLIC_SUBNET_1c_ID
 ELB_SECURITY_GROUP_ID=$(aws ec2 describe-security-groups --filters Name=tag:Name,Values=${PREFIX}-elb-sg --query "SecurityGroups[*].GroupId" --output text) && echo $ELB_SECURITY_GROUP_ID
@@ -39,21 +39,21 @@ TARGET_GROUP_ARN=$(aws elbv2 create-target-group \
 
 # Regster targets
 aws elbv2 register-targets \
-  --target-group-arn $TARGET_GROUP_ARN \
+  --target-group-arn "$TARGET_GROUP_ARN" \
   --targets Id=10.0.11.11 Id=10.0.12.11
 
 ## Listener
 # HTTP
 aws elbv2 create-listener \
-  --load-balancer-arn $LOAD_BALANCER_ARN \
+  --load-balancer-arn "$LOAD_BALANCER_ARN" \
   --protocol HTTP \
   --port 80  \
   --default-actions 'Type=redirect,RedirectConfig={Protocol=HTTPS,Port=443,Host="#{host}",Path="/#{path}",Query="#{query}",StatusCode=HTTP_301}'
 
 # HTTPS
 aws elbv2 create-listener \
-  --load-balancer-arn $LOAD_BALANCER_ARN \
+  --load-balancer-arn "$LOAD_BALANCER_ARN" \
   --protocol HTTPS \
   --port 443  \
-  --certificates CertificateArn=$CERTIFICATE_ARN \
-  --default-actions Type=forward,TargetGroupArn=$TARGET_GROUP_ARN
+  --certificates CertificateArn="$CERTIFICATE_ARN" \
+  --default-actions Type=forward,TargetGroupArn="$TARGET_GROUP_ARN"
