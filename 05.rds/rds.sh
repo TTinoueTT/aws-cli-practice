@@ -89,7 +89,7 @@ aws rds add-option-to-option-group \
 # DB instance
 aws rds create-db-instance \
   --engine mysql \
-  --engine-version 8.0.20 \
+  --engine-version 8.0.35 \
   --db-instance-identifier ${PREFIX}-db-instance \
   --master-username root \
   --master-user-password password \
