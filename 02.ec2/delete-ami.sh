@@ -9,6 +9,7 @@ set -euo pipefail
 #   --owners self \
 #   --filters "Name=tag:Name,Values=*cloud01-web*" \
 #   --query "Images[*].BlockDeviceMappings[*].EBS[*].SnapshotId"
+NAME_REGEX="*cloud01-web*"
 
 AMI_ID=$(aws ec2 describe-images \
   --owners self \
@@ -24,8 +25,6 @@ aws ec2 deregister-image --image-id "$AMI_ID"
 
 # スナップショットのの削除
 # ボリュームの削除
-
-NAME_REGEX="*cloud01-web*"
 
 # shellcheck disable=SC2207
 INSTANCE_IDS=($(aws ec2 describe-instances \
