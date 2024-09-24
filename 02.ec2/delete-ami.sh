@@ -12,10 +12,10 @@ set -euo pipefail
 NAME_REGEX="*cloud01-web*"
 
 AMI_ID=$(aws ec2 describe-images \
-  --owners self \
-  --filters "Name=tag:Name,Values=*cloud01-web*" \
-  --query "Images[*].ImageId" \
-  --output text) && echo "$AMI_ID"
+    --owners self \
+    --filters "Name=tag:Name,Values=*cloud01-web*" \
+    --query "Images[*].ImageId" \
+    --output text) && echo "$AMI_ID"
 
 aws ec2 deregister-image --image-id "$AMI_ID"
 
@@ -28,8 +28,8 @@ aws ec2 deregister-image --image-id "$AMI_ID"
 
 # shellcheck disable=SC2207
 INSTANCE_IDS=($(aws ec2 describe-instances \
-  --filters "Name=tag:Name,Values=$NAME_REGEX" \
-  --query "Reservations[*].Instances[*].InstanceId" \
-  --output text)) && echo "${INSTANCE_IDS[@]}"
+    --filters "Name=tag:Name,Values=$NAME_REGEX" \
+    --query "Reservations[*].Instances[*].InstanceId" \
+    --output text)) && echo "${INSTANCE_IDS[@]}"
 
 aws ec2 terminate-instances --instance-ids "${INSTANCE_IDS[@]}"
