@@ -1,0 +1,21 @@
+[
+    {
+        "IpProtocol": "tcp",
+        "FromPort": 22,
+        "ToPort": 22,
+        "IpRanges": [
+            {
+                "CidrIp": "124.45.192.33/32",
+                "Description": "kirarina 4F hiroba"
+            },
+            {
+                "CidrIp": "61.87.33.138/32",
+                "Description": "shimokita share lounge"
+            },
+            {
+                "CidrIp": "125.14.138.98/32",
+                "Description": "my home"
+            }
+        ]
+    }
+]
