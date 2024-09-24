@@ -1,0 +1,30 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    // "vscode_vibrancy.imports": ["/path/to/file"],
+    "vscode_vibrancy.opacity": 0.3,
+    "shellcheck.run": "onSave",
+    "shfmt.executablePath": "/opt/homebrew/bin/shfmt", // also: "onType"
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "string.quoted.double.shell",
+                "settings": {
+                    "foreground": "#d790e4ce" // ダブルクォーテーションの文字列の色
+                }
+            },
+            {
+                "scope": "string.quoted.single.shell",
+                "settings": {
+                    "foreground": "#8acf8a" // シングルクォーテーションの文字列の色
+                }
+            }
+        ]
+    },
+    "[typescript][javascript][html][typescriptreact][javascriptreact][json][eslintrc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "explicit"
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "mkhl.shfmt",
+        "timonwong.shellcheck",
+        "formulahendry.code-runner",
+        "foxundermoon.shell-format",
+        "jeff-hykin.better-shellscript-syntax",
+        "pinage404.bash-extension-pack",
+        "mads-hartmann.bash-ide-vscode",
+        "mkhl.direnv",
+        "rogalmic.bash-debug",
+        "rpinski.shebang-snippets",
+        "spmeesseman.vscode-taskexplorer",
+        "shakram02.bash-beautify"
+    ]
+}
